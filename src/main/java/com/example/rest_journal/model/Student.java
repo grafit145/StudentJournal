@@ -23,8 +23,8 @@ public class Student {
     private String surname;
     @Column(name = "date_of_birth")
     private LocalDate dateOfBirth;
-    @Column(name = "class_id")
-    private Integer classId;
+    @Column(name = "class_name")
+    private String className;
 
     public Integer getId() {
         return id;
@@ -66,13 +66,22 @@ public class Student {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public Integer getClassId() {
-        return classId;
+    public String getClassName() {
+        return className;
     }
 
-    public void setClassId(Integer classId) {
-        this.classId = classId;
+    public void setClassName(String className) {
+        this.className = className;
     }
 
-
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id=" + id +
+                ", firstname='" + firstname + '\'' +
+                ", patronymic='" + patronymic + '\'' +
+                ", surname='" + surname + '\'' +
+                ", dateOfBirth=" + dateOfBirth +
+                '}';
+    }
 }
