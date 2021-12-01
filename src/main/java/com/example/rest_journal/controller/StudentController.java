@@ -35,6 +35,7 @@ public class StudentController {
 
     }
 
+
     @GetMapping(value = "/students/{id}")
     public ResponseEntity<Student> read(@PathVariable(name = "id") int id){
         final Student student = studentService.read(id);
