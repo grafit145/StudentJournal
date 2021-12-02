@@ -18,12 +18,14 @@ public class StudentController {
         this.studentService = studentService;
     }
 
+    // Добавить нового ученика
     @PostMapping(value = "/students")
     public ResponseEntity<?> create(@RequestBody Student student){
         studentService.createStudent(student);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    // Получить список всех учеников
     @GetMapping(value= "/students")
     public ResponseEntity<List<Student>> read(){
         final List<Student> students = studentService.readAll();
@@ -35,7 +37,7 @@ public class StudentController {
 
     }
 
-
+    // Найти студента по его ID
     @GetMapping(value = "/students/{id}")
     public ResponseEntity<Student> read(@PathVariable(name = "id") int id){
         final Student student = studentService.read(id);
@@ -46,8 +48,7 @@ public class StudentController {
                 new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-
-
+    // Изменить данные ученика
     @PutMapping(value= "/students/{id}")
     public ResponseEntity<?> update(@PathVariable(name= "id") int id, @RequestBody Student student){
         final boolean isUpdated = studentService.updateStudent(student,id);
@@ -57,6 +58,7 @@ public class StudentController {
                 new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
     }
 
+    // Удаление данных об ученике
     @DeleteMapping(value = "/students/{id}")
     public ResponseEntity<?> delete(@PathVariable(name= "id")int id){
         final boolean isDeleted = studentService.deleteStudent(id);
