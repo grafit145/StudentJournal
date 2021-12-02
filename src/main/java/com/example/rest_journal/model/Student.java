@@ -23,6 +23,9 @@ public class Student {
     private String surname;
     @Column(name = "date_of_birth")
     private LocalDate dateOfBirth;
+    @Column(name = "class_name")
+    private String className;
+
 
     public Student(String firstname, String patronymic, String surname, LocalDate dateOfBirth, String className) {
         this.firstname = firstname;
@@ -35,9 +38,7 @@ public class Student {
     public Student() {
     }
 
-    @Column(name = "class_name")
 
-    private String className;
 
     public Integer getId() {
         return id;
