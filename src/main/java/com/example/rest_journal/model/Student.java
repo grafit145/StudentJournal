@@ -26,6 +26,20 @@ public class Student {
     @Column(name = "class_name")
     private String className;
 
+
+    public Student(String firstname, String patronymic, String surname, LocalDate dateOfBirth, String className) {
+        this.firstname = firstname;
+        this.patronymic = patronymic;
+        this.surname = surname;
+        this.dateOfBirth = dateOfBirth;
+        this.className = className;
+    }
+
+    public Student() {
+    }
+
+
+
     public Integer getId() {
         return id;
     }

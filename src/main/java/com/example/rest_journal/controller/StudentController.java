@@ -35,6 +35,7 @@ public class StudentController {
 
     }
 
+
     @GetMapping(value = "/students/{id}")
     public ResponseEntity<Student> read(@PathVariable(name = "id") int id){
         final Student student = studentService.read(id);
@@ -44,6 +45,8 @@ public class StudentController {
                 :
                 new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
+
+
 
     @PutMapping(value= "/students/{id}")
     public ResponseEntity<?> update(@PathVariable(name= "id") int id, @RequestBody Student student){

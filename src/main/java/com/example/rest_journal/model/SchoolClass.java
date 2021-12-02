@@ -1,9 +1,12 @@
 package com.example.rest_journal.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "classes")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class SchoolClass {
     @Id
     @Column(name = "class_id")

@@ -1,17 +1,23 @@
 package com.example.rest_journal.controller;
 
+
 import com.example.rest_journal.model.SchoolClass;
+
+import com.example.rest_journal.model.Student;
 import com.example.rest_journal.service.SchoolClassService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.*;
+import java.util.LinkedList;
 import java.util.List;
 
 @RestController
 public class SchoolClassController {
     private final SchoolClassService schoolClassService;
+
 
     @Autowired
     public SchoolClassController(SchoolClassService schoolClassService) {
@@ -33,13 +39,25 @@ public class SchoolClassController {
                new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping(value = "/classes/{id}")
+   /* @GetMapping(value = "/classes/{id}")
     public ResponseEntity<SchoolClass> read(@PathVariable(name = "id") int id){
         final SchoolClass schoolClass = schoolClassService.read(id);
+
         return schoolClass != null ?
                 new ResponseEntity<>(schoolClass, HttpStatus.OK)
                 :
                 new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }*/
+
+    @GetMapping(value = "/classes/{class_name}")
+    public ResponseEntity<List<Student>> readFromClass(@PathVariable(name = "class_name") String className){
+        final List<Student> studentsFromClass = schoolClassService.readAllFromClass(className);
+
+        return studentsFromClass != null && !studentsFromClass.isEmpty() ?
+                new ResponseEntity<>(studentsFromClass,HttpStatus.OK)
+                :
+                new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
     }
 
     @PutMapping(value = "/classes/{id}")
@@ -51,6 +69,8 @@ public class SchoolClassController {
                 new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
     }
 
+
+
     @DeleteMapping(value = "/classes/{id}")
     public ResponseEntity<?> delete(@PathVariable(name = "id") int id){
         final boolean isDeleted = schoolClassService.deleteSchoolClass(id);
@@ -59,4 +79,5 @@ public class SchoolClassController {
                 :
                 new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
     }
+
 }

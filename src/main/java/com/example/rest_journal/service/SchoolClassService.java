@@ -15,4 +15,6 @@ public interface SchoolClassService {
     boolean updateSchoolClass(SchoolClass schoolClass, int id);
 
     boolean deleteSchoolClass(int id);
+
+    List<Student> readAllFromClass(String className);
 }
