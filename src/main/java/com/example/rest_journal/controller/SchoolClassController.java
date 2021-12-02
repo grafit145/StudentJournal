@@ -24,12 +24,14 @@ public class SchoolClassController {
         this.schoolClassService = schoolClassService;
     }
 
+    // Добавить новый класс
     @PostMapping(value = "/classes")
     public ResponseEntity<?> create(@RequestBody SchoolClass schoolClass){
         schoolClassService.createSchoolClass(schoolClass);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    // Получить список имеющихся классов
     @GetMapping(value = "/classes")
     public ResponseEntity<List<SchoolClass>> read(){
        final List<SchoolClass> classes = schoolClassService.readAll();
@@ -49,6 +51,7 @@ public class SchoolClassController {
                 new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }*/
 
+    // Вывод списка учеников по имени класса
     @GetMapping(value = "/classes/{class_name}")
     public ResponseEntity<List<Student>> readFromClass(@PathVariable(name = "class_name") String className){
         final List<Student> studentsFromClass = schoolClassService.readAllFromClass(className);
@@ -59,7 +62,7 @@ public class SchoolClassController {
                 new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
     }
-
+    // Редактирование класса
     @PutMapping(value = "/classes/{id}")
     public ResponseEntity<?> update(@PathVariable(name = "id") int id, @RequestBody SchoolClass schoolClass){
         final boolean isUpdated = schoolClassService.updateSchoolClass(schoolClass, id);
@@ -69,8 +72,7 @@ public class SchoolClassController {
                 new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
     }
 
-
-
+    // Удаление класса
     @DeleteMapping(value = "/classes/{id}")
     public ResponseEntity<?> delete(@PathVariable(name = "id") int id){
         final boolean isDeleted = schoolClassService.deleteSchoolClass(id);
